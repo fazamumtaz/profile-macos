@@ -2,11 +2,14 @@ import React from "react";
 import { LIST_INTERNET, LIST_NOTIFICATION } from "../../Constants/ListSettings";
 import { Mic, Search } from "lucide-react";
 
-const LeftSide = () => {
+const LeftSide = ({ onClose, onX }) => {
   return (
     <div className="w-1/3 h-full pb-5 rounded-l-xl bg-white/70 backdrop-blur-md overflow-y-auto">
       <nav className="w-full h-[5vh] relative rounded-t-xl flex items-center justify-start gap-2 px-5 py-6">
-        <button className="h-4 w-4 relative rounded-full bg-[#ff5f56] border border-[#e0443e]"></button>
+        <button
+          onClick={onClose}
+          className="h-4 w-4 relative rounded-full bg-[#ff5f56] border border-[#e0443e]"
+        ></button>
         <button className="h-4 w-4 rounded-full relative bg-[#ffbd2e] border border-[#dea123]"></button>
         <button className="h-4 w-4 rounded-full relative bg-[#27c93f] border border-[#1aab29]"></button>
       </nav>

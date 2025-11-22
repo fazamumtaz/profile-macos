@@ -21,6 +21,7 @@ const App = () => {
       <Settings
         isOpen={isSettingsOpen}
         onClose={() => setIsSettingsOpen(false)}
+        onX={setIsSettingsOpen}
       />
     </main>
   );

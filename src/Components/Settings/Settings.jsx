@@ -3,7 +3,7 @@ import LeftSide from "./LeftSide";
 import RightSide from "./RightSide";
 import gsap from "gsap";
 
-const Settings = ({ isOpen, onClose }) => {
+const Settings = ({ isOpen, onClose, onX }) => {
   const SettingsRef = useRef(null);
   const [shouldRender, setShouldRender] = useState(false);
 
@@ -36,7 +36,7 @@ const Settings = ({ isOpen, onClose }) => {
       ref={SettingsRef}
       className="w-3xl absolute flex top-20 left-20 rounded-xl shadow-2xl h-[55vh]"
     >
-      <LeftSide />
+      <LeftSide onClose={onClose} onX={onX} />
       <RightSide />
     </div>
   );

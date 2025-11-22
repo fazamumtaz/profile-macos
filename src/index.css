@@ -14,6 +14,9 @@ body {
   @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
 }
 
+* {
+  cursor: url("https://www.macos-web.app/cursors/normal-select.svg"), auto;
+}
 /* macOS-style scrollbar */
 .macos-scrollbar::-webkit-scrollbar {
   width: 8px;
