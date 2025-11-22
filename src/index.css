@@ -14,6 +14,31 @@ body {
   @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
 }
 
-.font-georama {
-  font-family: "Georama", sans-serif;
+/* macOS-style scrollbar */
+.macos-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.macos-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.macos-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.macos-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* Remove arrows */
+.macos-scrollbar::-webkit-scrollb ar-button {
+  display: none;
+}
+
+/* For Firefox */
+.macos-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
 }
