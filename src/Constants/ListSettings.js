@@ -1,3 +1,13 @@
+import {
+  BrainCircuit,
+  Clock,
+  Cloud,
+  FolderClock,
+  FolderDown,
+  HardDrive,
+  Trash2,
+} from "lucide-react";
+
 const LIST_INTERNET = [
   {
     img: "wifi",
@@ -36,4 +46,38 @@ const LIST_NOTIFICATION = [
   },
 ];
 
-export { LIST_INTERNET, LIST_NOTIFICATION };
+const LIST_FILES_1 = [
+  {
+    icon: Clock,
+    label: "Recents",
+  },
+  {
+    icon: FolderClock,
+    label: "Shared",
+  },
+];
+
+const LIST_FILES_2 = [
+  {
+    icon: FolderDown,
+    label: "Download",
+  },
+  {
+    icon: Cloud,
+    label: "iCloud",
+  },
+  {
+    icon: BrainCircuit,
+    label: "On My Brain",
+  },
+  {
+    icon: HardDrive,
+    label: "Drive",
+  },
+  {
+    icon: Trash2,
+    label: "Recently Deleted",
+  },
+];
+
+export { LIST_INTERNET, LIST_NOTIFICATION, LIST_FILES_1, LIST_FILES_2 };

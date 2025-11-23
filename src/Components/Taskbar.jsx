@@ -50,10 +50,10 @@ const Taskbar = ({ isFinder, setFinder, isSettings, setSettings }) => {
           onClick={() => setFinder(!isFinder)}
           className="hover:bg-white/10 rounded-xl relative cursor-default"
         >
-          <img src="/finder.png" className="w-full h-full" alt="" />
+          <img src="/file.png" className="w-full h-full" alt="" />
           {isFinderTooltip && (
-            <div className="tooltip-finder absolute px-3 py-1.5 bg-white/50 rounded-lg bottom-20 left-0">
-              <p>Finder</p>
+            <div className="tooltip-finder absolute px-3 py-1.5 bg-white/50 rounded-lg bottom-20 left-3">
+              <p>File</p>
             </div>
           )}
         </li>
