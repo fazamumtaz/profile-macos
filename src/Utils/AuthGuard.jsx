@@ -17,7 +17,6 @@ const AuthGuard = ({ children }) => {
         return;
       }
 
-      // kalo ada, fetch datanya
       try {
         await apiRequest("/user", {
           method: "GET",
@@ -27,8 +26,8 @@ const AuthGuard = ({ children }) => {
         });
       } catch (error) {
         alert("AuthGuard error, says: " + error.message);
-        localStorage.removeItem("token");
-        navigate("/login");
+        // localStorage.removeItem("token");
+        // navigate("/login");
       } finally {
         setIsCheck(false);
       }
@@ -37,10 +36,6 @@ const AuthGuard = ({ children }) => {
     // jalanin fungsinya
     checkAuth();
   }, [navigate]);
-
-  if (isCheck) {
-    <div>loading</div>;
-  }
 
   return <>{children}</>;
 };

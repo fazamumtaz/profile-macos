@@ -1,9 +1,41 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Briefcase, Download, MapPin } from "lucide-react";
+import { apiRequest } from "../Utils/api";
 
-const Profile = ({ user }) => {
+const Profile = () => {
+  const ProfileRef = useRef(null);
+  const [userData, setUserData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      setIsLoading(true);
+      try {
+        const token = localStorage.getItem("token");
+        const res = await apiRequest("/user", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const user = res.data;
+        setUserData(user);
+        console.log(user);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Failed to fetch user:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchUser();
+  }, []);
   return (
-    <div className="w-md bg-white pt-[7vh] abs-center rounded-xl shadow-2xl p-5">
+    <div
+      ref={ProfileRef}
+      className="w-md hidden bg-white pt-[7vh] abs-center rounded-xl shadow-2xl p-5"
+    >
       <nav className="w-full h-[5vh] absolute left-0 top-0 rounded-t-xl flex items-center justify-between px-5 py-7 border-b border-gray-300">
         <div className="flex gap-1.5">
           <button className="h-4 w-4 relative rounded-full bg-[#ff5f56] border border-[#e0443e]"></button>
@@ -24,14 +56,14 @@ const Profile = ({ user }) => {
         />
         <div className="flex flex-col flex-wrap">
           <h1 className="font-semibold text-zinc-800 text-2xl wrap-break-word">
-            {user.fullname}
+            {userData.fullname}
           </h1>
-          <p className="text-zinc-400 text-sm mb-5">{user.username}</p>
+          <p className="text-zinc-400 text-sm mb-5">{userData.username}</p>
           <div className="flex gap-2">
             <div className="flex gap-1 items-center">
               <MapPin strokeWidth={2.2} className="w-3 h-3 stroke-zinc-600" />
               <p className="text-zinc-600 text-xs">
-                {user.city}, {user.country}
+                {userData.city}, {userData.country}
               </p>
             </div>
             <div className="flex gap-1 items-center">
@@ -39,7 +71,7 @@ const Profile = ({ user }) => {
                 strokeWidth={2.2}
                 className="w-3 h-3 stroke-zinc-600"
               />
-              <p className="text-zinc-600 text-xs">{user.job}</p>
+              <p className="text-zinc-600 text-xs">{userData.job}</p>
             </div>
           </div>
         </div>
@@ -49,13 +81,13 @@ const Profile = ({ user }) => {
 
       <h1 className="text-xl font-semibold my-3">About</h1>
       <div className="w-full rounded-md">
-        <p className="text-zinc-700">{user.about || "Halo User 👋🏻"}</p>
+        <p className="text-zinc-700">{userData.about || "Halo User 👋🏻"}</p>
       </div>
 
       <h1 className="text-xl text-center font-semibold my-3">Social Media</h1>
       <div className="flex gap-2 items-center justify-center">
         <a
-          href="#"
+          href={`https://www.instagram.com/${userData.instagram}/`}
           className="hover:scale-120 transition-all hover:rotate-z-10"
         >
           <img
@@ -65,7 +97,7 @@ const Profile = ({ user }) => {
           />
         </a>
         <a
-          href="#"
+          href={userData.facebook}
           className="hover:scale-120 transition-all hover:rotate-z-10"
         >
           <img
@@ -75,7 +107,7 @@ const Profile = ({ user }) => {
           />
         </a>
         <a
-          href="#"
+          href={`https://x.com/${userData.twitter}`}
           className="hover:scale-120 transition-all hover:rotate-z-10"
         >
           <img

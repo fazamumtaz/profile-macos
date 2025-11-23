@@ -2,7 +2,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import React, { useState } from "react";
 
-const Taskbar = ({ isFinder, setFinder, isSettings, setSettings }) => {
+const Taskbar = ({ isFiles, setFiles, isSettings, setSettings }) => {
   const [isSettingsTooltip, setSettingsTooltip] = useState(false);
   const [isFinderTooltip, setFinderTooltip] = useState(false);
 
@@ -47,7 +47,7 @@ const Taskbar = ({ isFinder, setFinder, isSettings, setSettings }) => {
         <li
           onMouseEnter={() => setFinderTooltip(true)}
           onMouseLeave={() => setFinderTooltip(false)}
-          onClick={() => setFinder(!isFinder)}
+          onClick={() => setFiles(!isFiles)}
           className="hover:bg-white/10 rounded-xl relative cursor-default"
         >
           <img src="/file.png" className="w-full h-full" alt="" />
