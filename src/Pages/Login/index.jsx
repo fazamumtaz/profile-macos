@@ -9,6 +9,24 @@ import React, { useState } from "react";
 
 function Login() {
   const [isPassword, setIsPassword] = useState(true);
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form data:", formData);
+    // baru call api
+  };
   return (
     <main id="login" className="w-full h-screen relative">
       <div className="w-full h-full absolute backdrop-blur-sm bg-black/20 justify-center items-center"></div>
@@ -43,16 +61,22 @@ function Login() {
         <h1 className="font-semibold text-lg text-white -mt-2 mb-3">
           Hello There!
         </h1>
-        <form className="flex flex-col relative">
+        <form onSubmit={handleSubmit} className="flex flex-col relative">
           <input
             type="text"
+            name="username"
             placeholder="username"
+            value={formData.username}
+            onChange={handleInputChange}
             className="focus:outline-none bg-white/20 backdrop-blur-lg rounded-lg placeholder:text-zinc-300 px-3 py-2 text-zinc-300 scale-75"
           />
           <div className="relative scale-75">
             <input
               type={isPassword ? "password" : "text"}
+              name="password"
               placeholder="password"
+              value={formData.password}
+              onChange={handleInputChange}
               className="focus:outline-none bg-white/20 backdrop-blur-lg rounded-lg placeholder:text-zinc-300 px-3 py-2 text-zinc-300"
             />
             <div
@@ -65,9 +89,12 @@ function Login() {
                 <LockOpen className="w-4 h-4 stroke-zinc-300" />
               )}
             </div>
-            <div className="p-2.5 rounded-full bg-white/20 backdrop-blur-lg absolute -right-12 bottom-0.5 hover:bg-zinc-200/40">
+            <button
+              type="submit"
+              className="p-2.5 rounded-full bg-white/20 backdrop-blur-lg absolute -right-12 bottom-0.5 hover:bg-zinc-200/40"
+            >
               <ArrowRight className="w-4 h-4 stroke-zinc-300" />
-            </div>
+            </button>
           </div>
         </form>
       </div>
