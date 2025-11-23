@@ -15,10 +15,13 @@ import {
   UserLock,
 } from "lucide-react";
 import React, { useState } from "react";
+import { apiRequest } from "../../Utils/api";
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
   const [isPassword, setIsPassword] = useState(true);
   const [registrationSection, setRegistrationSection] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     fullname: "",
     username: "",
@@ -27,6 +30,7 @@ function SignUp() {
     city: "",
     country: "",
   });
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -36,11 +40,34 @@ function SignUp() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Form data:", formData);
-    // baru call api
+
+    setIsLoading(true);
+    try {
+      const data = await apiRequest("/register", {
+        method: "POST",
+        body: {
+          fullname: formData.fullname,
+          username: formData.username,
+          password: formData.password,
+          job: formData.job,
+          city: formData.city,
+          country: formData.country,
+        },
+      });
+
+      // If we get here, registration succeeded (apiRequest didn't throw)
+      console.log("Signup berhasil", data);
+      navigate("/login");
+    } catch (error) {
+      alert("Gagal Registrasi: " + error.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
+
   return (
     <main id="login" className="w-full h-screen relative">
       <div className="w-full h-full absolute backdrop-blur-sm bg-black/20 justify-center items-center"></div>
@@ -191,6 +218,7 @@ function SignUp() {
                   <ArrowRight className="w-4 h-4 stroke-zinc-300" />
                 </button>
                 <button
+                  type="button"
                   onClick={() => setRegistrationSection(1)}
                   className="p-2.5 rounded-full bg-white/20 backdrop-blur-lg absolute bottom-0.5 hover:bg-zinc-200/40 -left-12"
                 >

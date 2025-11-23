@@ -6,13 +6,18 @@ import {
   RectangleEllipsis,
 } from "lucide-react";
 import React, { useState } from "react";
+import { apiRequest } from "../../Utils/api";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [isPassword, setIsPassword] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
+
+  const Navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -22,10 +27,30 @@ function Login() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Form data:", formData);
-    // baru call api
+
+    setIsLoading(true);
+
+    try {
+      const res = await apiRequest("/login", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (res && res.token) {
+        localStorage.setItem("token", res.token);
+      }
+
+      console.log("login berhasil");
+      Navigate("/");
+    } catch (error) {
+      alert(error.message || "Login gagal, coba lagi!");
+      console.error("Login error:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
   return (
     <main id="login" className="w-full h-screen relative">

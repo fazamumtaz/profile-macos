@@ -1,6 +1,7 @@
 import {
   Briefcase,
   CaseSensitive,
+  CaseUpper,
   Check,
   Facebook,
   Flag,
@@ -41,7 +42,7 @@ const ProfileForm = ({ formData, onChange }) => {
             className="bg-black/10 rounded-lg focus:outline-none placeholder:text-sm text-sm flex items-center px-8 py-1 w-full text-zinc-700 h-8"
             placeholder="Badzlan Nur"
           />
-          <CaseSensitive className="absolute stroke-zinc-700 top-1/2 -translate-y-1/2 h-4 w-4 left-2" />
+          <CaseUpper className="absolute stroke-zinc-700 top-1/2 -translate-y-1/2 h-4 w-4 left-2" />
         </div>
         {/* Job */}
         <div className="relative">
