@@ -1,13 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Georama:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import "tailwindcss";
 
-body {
+#main {
   /* Gunakan bg-cover, bukan object-cover */
   @apply bg-cover bg-center bg-no-repeat min-h-screen;
-
-  /* Pastikan nama file & ekstensinya sesuai (jpg vs jpeg) */
   background-image: url("/wallpaper2.jpg");
+}
+
+.no-drag {
+  -webkit-user-drag: none; /* Buat browser berbasis Webkit (Chrome, Safari) */
+  user-drag: none; /* Standar (meski supportnya belum rata) */
+  user-select: none; /* Biar gambarnya gak bisa di-highlight biru */
+  -webkit-user-select: none;
+}
+
+#login {
+  /* Gunakan bg-cover, bukan object-cover */
+  @apply bg-cover bg-center bg-no-repeat min-h-screen;
+  background-image: url("/login.jpg");
 }
 
 .abs-center {
@@ -16,6 +27,7 @@ body {
 
 * {
   cursor: url("https://www.macos-web.app/cursors/normal-select.svg"), auto;
+  font-family: "Inter";
 }
 /* macOS-style scrollbar */
 .macos-scrollbar::-webkit-scrollbar {

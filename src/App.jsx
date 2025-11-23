@@ -9,7 +9,7 @@ const App = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   return (
-    <main className="h-screen w-full bg-black/10">
+    <main id="main" className="h-screen w-full bg-black/10">
       <Navbar />
       <Taskbar
         setFinder={setIsFinderOpen}
