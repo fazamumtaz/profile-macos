@@ -26,8 +26,8 @@ const AuthGuard = ({ children }) => {
         });
       } catch (error) {
         alert("AuthGuard error, says: " + error.message);
-        // localStorage.removeItem("token");
-        // navigate("/login");
+        localStorage.removeItem("token");
+        navigate("/login");
       } finally {
         setIsCheck(false);
       }

@@ -2,7 +2,7 @@ import React from "react";
 import { LIST_INTERNET, LIST_NOTIFICATION } from "../../Constants/ListSettings";
 import { Mic, Search } from "lucide-react";
 
-const LeftSide = ({ onClose, onX }) => {
+const LeftSide = ({ user, onClose }) => {
   return (
     <div className="w-1/3 h-full pb-5 rounded-l-xl bg-white/70 backdrop-blur-md overflow-y-auto">
       <nav className="w-full h-[5vh] relative rounded-t-xl flex items-center justify-start gap-2 px-5 py-6">
@@ -32,8 +32,8 @@ const LeftSide = ({ onClose, onX }) => {
             alt=""
           />
           <div className="flex flex-col items-start">
-            <h1 className="text-lg text-white tracking-wide -mt-1">
-              Badzlan Nur
+            <h1 className="text-lg text-white tracking-wide leading-5 -mt-1">
+              {user.fullname || "iCloud Account"}
             </h1>
             <p className="text-xs font-light text-white">Apple ID</p>
           </div>
@@ -42,7 +42,10 @@ const LeftSide = ({ onClose, onX }) => {
         {/* Internet */}
         <div className="w-[90%] mx-auto flex flex-col space-y-1 mb-5">
           {LIST_INTERNET.map((list) => (
-            <button className="w-full hover:bg-white/30 transition-all p-1 rounded-md flex items-center space-x-2">
+            <button
+              key={list.label}
+              className="w-full hover:bg-white/30 transition-all p-1 rounded-md flex items-center space-x-2"
+            >
               <img src={`/${list.img}.png`} className="h-5 w-5" alt="" />
               <p className="text-sm">{list.label}</p>
             </button>
@@ -51,7 +54,10 @@ const LeftSide = ({ onClose, onX }) => {
         {/* Notification */}
         <div className="w-[90%] mx-auto flex flex-col space-y-1">
           {LIST_NOTIFICATION.map((list) => (
-            <button className="w-full hover:bg-white/30 transition-all p-1 rounded-md flex items-center space-x-2">
+            <button
+              key={list.label}
+              className="w-full hover:bg-white/30 transition-all p-1 rounded-md flex items-center space-x-2"
+            >
               <img src={`/${list.img}.png`} className="h-5 w-5" alt="" />
               <p className="text-sm">{list.label}</p>
             </button>

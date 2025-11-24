@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
-import Finder from "./Components/Finder"; // Import the Finder component
+import { useState } from "react";
+import Finder from "./Components/Finder";
 import Navbar from "./Components/Navbar";
 import Taskbar from "./Components/Taskbar";
 import Settings from "./Components/Settings/Settings";
 import AuthGuard from "./Utils/AuthGuard.jsx";
-
 import Profile from "./Components/Profile.jsx";
 
 const App = () => {
   const [isFilesOpen, setIsFilesOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  // ✅ Add state for Profile visibility
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   return (
     <AuthGuard>
@@ -21,11 +22,24 @@ const App = () => {
           setSettings={setIsSettingsOpen}
           isSettings={isSettingsOpen}
         />
-        <Finder isOpen={isFilesOpen} onClose={() => setIsFilesOpen(false)} />
+
+        {/* ✅ Pass state control to Finder */}
+        <Finder
+          isOpen={isFilesOpen}
+          onClose={() => setIsFilesOpen(false)}
+          onOpenProfile={() => setIsProfileOpen(true)} // Pass handler
+        />
+
         <Settings
           isOpen={isSettingsOpen}
           onClose={() => setIsSettingsOpen(false)}
           onX={setIsSettingsOpen}
+        />
+
+        {/* ✅ Profile controlled by state */}
+        <Profile
+          isOpen={isProfileOpen}
+          onClose={() => setIsProfileOpen(false)}
         />
       </main>
     </AuthGuard>
