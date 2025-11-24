@@ -5,20 +5,25 @@ import {
   LockOpen,
   RectangleEllipsis,
 } from "lucide-react";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { apiRequest } from "../../Utils/api";
 import { useNavigate } from "react-router-dom";
 import UserGuard from "../../Utils/UserGuard.jsx";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 function Login() {
   const [isPassword, setIsPassword] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const fadingRef = useRef(null);
+  const [isFadingOut, setIsFadingOut] = useState(false);
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
 
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -32,8 +37,6 @@ function Login() {
     e.preventDefault();
     console.log("Form data:", formData);
 
-    setIsLoading(true);
-
     try {
       const res = await apiRequest("/login", {
         method: "POST",
@@ -45,16 +48,75 @@ function Login() {
       }
 
       console.log("login berhasil");
-      Navigate("/");
+      navigate("/");
     } catch (error) {
       alert(error.message || "Login gagal, coba lagi!");
       console.error("Login error:", error);
-    } finally {
-      setIsLoading(false);
     }
   };
+
+  useGSAP(() => {
+    if (isLoading) {
+      const tl = gsap.timeline();
+      tl.from(".loader", {
+        width: 0,
+        duration: 5,
+        ease: "power3.inOut",
+      })
+        .set(".filler", {
+          opacity: 1,
+        })
+        .to(".filler", {
+          opacity: 1,
+          height: "150vh",
+          width: "150vw",
+          duration: 2.5,
+          top: "-20%",
+          left: "50%",
+          ease: "expo.out",
+          onComplete: () => {
+            setIsLoading(false);
+            // Animate the fade immediately after loading completes
+            setTimeout(() => {
+              if (fadingRef.current) {
+                gsap.to(fadingRef.current, {
+                  opacity: 0,
+                  duration: 1,
+                  onComplete: () => setIsFadingOut(true),
+                });
+              }
+            }, 100);
+          },
+        });
+    }
+  }, [isLoading]);
+
+  if (isLoading) {
+    return (
+      <main className="h-screen w-full bg-black">
+        <img
+          src="/whiteapple.png"
+          className="absolute left-1/2 -translate-x-1/2 top-[35%] w-30"
+          alt=""
+        />
+        <div className="h-1.5 w-[300px] rounded-full bg-white/20 left-1/2 -translate-x-1/2 absolute top-[60%]">
+          <div className="loader bg-white h-full w-full rounded-full"></div>
+        </div>
+        <div className="filler opacity-0 h-1.5 w-[300px] rounded-full bg-white left-1/2 -translate-x-1/2 fixed top-[60%]"></div>
+      </main>
+    );
+  }
+
   return (
     <UserGuard>
+      {/* White fading overlay */}
+      {!isFadingOut && (
+        <div
+          ref={fadingRef}
+          className="filler-main absolute h-screen w-full bg-white z-50 opacity-100"
+        ></div>
+      )}
+
       <main id="login" className="w-full h-screen relative">
         <div className="w-full h-full absolute backdrop-blur-sm bg-black/20 justify-center items-center"></div>
 

@@ -250,7 +250,7 @@ const ProfileForm = ({
         onClose={() => setShowConfirmDialog(false)}
         onConfirm={handleConfirmedUpdate}
         title="Update Profile"
-        message="Are you sure you want to update your profile information? This will change your public profile data."
+        message="Are you sure want to update ur personal information?"
       />
     </>
   );

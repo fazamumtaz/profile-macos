@@ -128,9 +128,11 @@ const Profile = ({ isOpen, onClose }) => {
           {/* divider */}
           <div className="border rounded-full border-gray-300 w-full mx-auto"></div>
 
-          <h1 className="text-xl font-semibold my-3">About</h1>
-          <div className="w-full rounded-md">
-            <p className="text-zinc-700">{userData.about || "Halo User 👋🏻"}</p>
+          <h1 className="text-xl font-semibold mt-3 mb-1">About</h1>
+          <div className="w-full rounded-md mb-10">
+            <p className="text-zinc-700 text-sm">
+              {userData.about || "Halo User 👋🏻"}
+            </p>
           </div>
 
           <h1 className="text-xl text-center font-semibold my-3">
