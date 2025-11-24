@@ -76,7 +76,7 @@ function SignUp() {
 
         <div className="absolute left-1/2 -translate-x-1/2 bottom-10 flex gap-2">
           <a
-            href="/signup"
+            href="/login"
             className="flex flex-col justify-center rounded-lg items-center p-5 px-7 space-y-2 hover:bg-white/20 hover:backdrop-blur-md group transition-colors"
           >
             <RectangleEllipsis className="stroke-zinc-200 group-hover:stroke-[#1c1d1e]" />
@@ -85,7 +85,7 @@ function SignUp() {
             </h1>
           </a>
           <a
-            href="https://www.github.com"
+            href="https://github.com/fazamumtaz/profile-macos"
             className="flex flex-col justify-center rounded-lg items-center p-5 px-7 space-y-2 hover:bg-white/20 hover:backdrop-blur-md group transition-colors"
           >
             <Github className="stroke-zinc-200 group-hover:stroke-[#1c1d1e]" />
